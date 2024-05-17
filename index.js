@@ -27,15 +27,58 @@ function Gameboard(){
     }
 
     function insertValue(row,column,name,marker){
-        const available = (board[row][column].getValue() === "");
+        const available = (board[row][column].getValue() === ""); //takes the selected space
         if (available) {
             board[row][column].newValue(marker)
-        } else{
-            console.log(`Current Player is ${name} with this marker ${marker}`)
-            throw new Error("Location already taken");
+        }else{
+            console.log(`Current Player is ${name} with this marker ${marker}`) //prevent players from 
+            throw new Error("Location already taken"); //adding new values to aready taken spaces
             
         }
         
+    }
+
+    //check if there is a winner or tie for the current run of the game
+    function checkWin(name,marker){
+        // getBoard()
+        if (board[0][0].getValue() === marker &&// leading diagonal \
+         board[1][1].getValue() === marker &&
+         board[2][2].getValue() === marker ||//top row
+         board[0][0].getValue() === marker &&
+         board[0][1].getValue() === marker &&
+         board[0][2].getValue() === marker ||//middle row
+         board[1][0].getValue() === marker &&
+         board[1][1].getValue() === marker &&
+         board[1][2].getValue() === marker ||// bottom row
+         board[2][0].getValue() === marker &&
+         board[2][1].getValue() === marker &&
+         board[2][2].getValue() === marker ||//first column
+         board[0][0].getValue() === marker &&
+         board[1][0].getValue() === marker &&
+         board[2][0].getValue() === marker ||//middle column
+         board[0][1].getValue() === marker &&
+         board[1][1].getValue() === marker &&
+         board[2][1].getValue() === marker ||// last column
+         board[0][2].getValue() === marker &&
+         board[1][2].getValue() === marker &&
+         board[2][2].getValue() === marker ||// opposite diagonal /
+         board[0][2].getValue() === marker &&
+         board[1][1].getValue() === marker &&
+         board[2][0].getValue() === marker 
+         ) {
+            console.log(`${name} has won this round`)
+        }else if(board[0][0].getValue() !== "" &&
+                 board[0][1].getValue() !=="" &&
+                 board[0][2].getValue() !== "" &&
+                 board[1][0].getValue() !== "" &&
+                 board[1][1].getValue() !== "" &&
+                 board[1][2].getValue() !== "" &&
+                 board[2][0].getValue() !== "" &&
+                 board[2][1].getValue() !== "" &&
+                 board[2][2].getValue() !== "")
+            {
+            console.log("This is a tie")
+        }
     }
 
   // This method will be used to print our board to the console.
@@ -46,13 +89,7 @@ function Gameboard(){
        console.log(boardWithCellValues);
     };
  
-return {getBoard,insertValue,printBoard}
-}
-
-
-
-function Players(){
-
+return {getBoard,insertValue,printBoard,checkWin}
 }
 
 function GameController(
@@ -82,6 +119,7 @@ function GameController(
 
     function NewRoundMessage() {
         boards.printBoard() //Display current Board and players
+        
         console.log(`Current Player is ${currentPlayer.name} with the marker ${currentPlayer.marker}`)
     }
 
@@ -91,18 +129,20 @@ function GameController(
             ${getCurrentPlayer().marker} IN ROW: ${row} AND COLUMN: ${column}`
         );
         boards.insertValue(row,column,getCurrentPlayer().name,getCurrentPlayer().marker);
+        boards.checkWin(getCurrentPlayer().name,getCurrentPlayer().marker)
         swapPlayers();
-        NewRoundMessage()
+        NewRoundMessage();
+        
     }
 
     NewRoundMessage(); //first round
 
     return{
         getCurrentPlayer,
-        playRound}
+        playRound
+    }
 }
 
-const game = GameController();
-// game.playRound(1,1);
-// game.playRound(0,2);
-// game.playRound(0,2);
+function GameUI(){
+    const game = GameController();
+}
