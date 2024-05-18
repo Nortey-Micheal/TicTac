@@ -30,7 +30,7 @@ function Gameboard(){
         const available = (board[row][column].getValue() === ""); //takes the selected space
         if (available) {
             board[row][column].newValue(marker)
-            board[row][column].classList.add(`${name}`)
+            //board[row][column].classList.add(`${name}`)
         }else{
             console.log(`Current Player is ${name} with this marker ${marker}`) //prevent players from 
             throw new Error("Location already taken"); //adding new values to aready taken spaces
