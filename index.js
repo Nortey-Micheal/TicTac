@@ -81,6 +81,13 @@ function Gameboard(){
         }
     }
 
+    //end the game
+    function endGame () {
+        const endText = document.querySelector("section>div>p:first-of-type")
+        const winnerText = document.querySelector("section>div>p:last-of-type")
+        endText.textContent 
+    }
+
   // This method will be used to print our board to the console.
   // It is helpful to see what the board looks like after each turn as we play,
   // but we won't need it after we build our UI
@@ -139,10 +146,55 @@ function GameController(
 
     return{
         getCurrentPlayer,
-        playRound
+        playRound,
+        getBoard: boards.getBoard
     }
 }
 
 function GameUI(){
     const game = GameController();
+    const playerTurnCont = document.querySelector(".playerTurn");
+    const boardDiv = document.querySelector(".board");
+    
+    const updateScreen = () => {
+        //clear the board
+        boardDiv.textContent = "";
+
+        //get newest version of current player and board
+        const board = game.getBoard()
+        const currentPlayer = game.getCurrentPlayer();
+
+        //display current player's turn
+        playerTurnCont.textContent = `${currentPlayer.marker} : ${currentPlayer.name}'s turn`;
+
+        //Render board squares
+        board.forEach((row,indexi)=> {
+            row.forEach((cell,index) =>{
+                //All clickables should be buttons!!
+                const cellButton = document.createElement("button");
+                cellButton.classList.add("cell");
+                cellButton.dataset.row = indexi;
+                cellButton.dataset.column = index;
+                cellButton.textContent = cell.getValue();
+                boardDiv.appendChild(cellButton)
+            })
+        })
+
+        
+    }
+    function clickEvenHandler(event) {
+        const clickedRow = event.target.dataset.row;
+        const clickedColumn = event.target.dataset.column;
+
+        if(!clickedColumn || !clickedRow) return;
+        game.playRound(clickedRow,clickedColumn);
+        updateScreen();
+    }
+
+    boardDiv.addEventListener("click",clickEvenHandler);
+
+    //Initial render
+    updateScreen()
 }
+
+GameUI();
