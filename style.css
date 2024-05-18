@@ -107,3 +107,11 @@ section button{
     border-radius: 10px;
     display: none;
 }
+
+.player1{
+    color: red;
+}
+
+.player2{
+    color: yellow;
+}
