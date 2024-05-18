@@ -40,6 +40,9 @@ function Gameboard(){
 
     //check if there is a winner or tie for the current run of the game
     function checkWin(name,marker){
+        const endText =      document.querySelector("section>div>p:first-of-type")
+        const winnerText = document.querySelector("section>div>p:last-of-type")
+        const section = document.querySelector("section")
         // getBoard()
         if (board[0][0].getValue() === marker &&// leading diagonal \
          board[1][1].getValue() === marker &&
@@ -66,7 +69,9 @@ function Gameboard(){
          board[1][1].getValue() === marker &&
          board[2][0].getValue() === marker 
          ) {
-            console.log(`${name} has won this round`)
+           endText.textContent = "This is the end of the round";
+           winnerText.textContent = `${name} has won this round`;
+        section.style.display = "block";
         }else if(board[0][0].getValue() !== "" &&
                  board[0][1].getValue() !=="" &&
                  board[0][2].getValue() !== "" &&
@@ -77,14 +82,16 @@ function Gameboard(){
                  board[2][1].getValue() !== "" &&
                  board[2][2].getValue() !== "")
             {
-            console.log("This is a tie")
+            endText.textContent = "This is a tie"   ;     
+            winnerText.textContent = "No one won this round";
+        section.style.display = "block"
         }
     }
 
     //end the game
     function endGame () {
-        const endText = document.querySelector("section>div>p:first-of-type")
-        const winnerText = document.querySelector("section>div>p:last-of-type")
+        
+        
         endText.textContent 
     }
 
