@@ -1,3 +1,32 @@
+:root{
+    --yellow: #FFD700;
+    --mainBg: #022C43;
+    --buttonShdw: #053F5E;
+    --buttonBg: #115173;
+    --X-Bg: #00A8CC;
+    --hover: #0C7B93;
+}
+
+@font-face {
+    font-family: "Archivo";
+    src: url(fonts/ArchivoBlack-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Marker";
+    src: url(fonts/PermanentMarker-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Poetsen";
+    src: url(fonts/PoetsenOne-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Press";
+    src: url(fonts/PressStart2P-Regular.ttf);
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -5,11 +34,18 @@
     /* border: 1px solid; */
 }
 
+p{
+    color: white;
+}
+
 body{
+    position: relative;
     min-height: 630px;
     min-width: 550px;
     display: flex;
     flex-direction: column;
+    background-color: var(--mainBg);
+    font-family: Poetsen;
 }
 
 .board button{
@@ -17,14 +53,23 @@ body{
     /* max-width: 250px;
     max-height: 250px; */
     border: none;
-    box-shadow: #2B5876 5px 5px 5px;
+    background-color: var(--buttonBg);
+    box-shadow: var(--buttonShdw) 7px 8px 4px;
     font-size: clamp(40px,5rem,15vw);
     font-weight: bolder;
+    font-family: Marker;
+}
+
+.board button:hover{
+    background-color: var(--hover);
 }
 
 li,a{
     text-decoration: none;
     list-style: none;
+    color: white;
+    font-size: large;
+    font-weight: bold;
 }
 
 h1{
@@ -33,6 +78,7 @@ h1{
     color: transparent;
     text-align: center;
     text-decoration: #2B5876 underline 3px;
+    font-family: Press;
 }
 
 .container{
@@ -42,7 +88,7 @@ h1{
 }
 
 header{
-    background-color: aquamarine;
+    background-color: var(--buttonBg);
     height: 7vh;
     min-height: 15px;
     margin-bottom: 25px;
@@ -72,7 +118,7 @@ main{
     min-height: 90%;
     display: flex;
     flex-direction: column;
-    padding: 50px;
+    padding-bottom: 50px;
 }
 
 main>div{
@@ -92,20 +138,46 @@ main>div>div>div:nth-of-type(2){
     flex-grow: 1;
     display: grid;
     grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
-    gap: 15px;
+    gap: 20px;
 }
 
 section {
     position: absolute;
-    left: 50%;
-    top: 50%;
+    top: 30%; 
+    height: 50%;
+    width: 100%;
+    /* width: min(90%,1100px); */
+
+    align-items: center;
+    justify-content: center;
+    display: none;
+    background-color: var(--hover);
+}
+
+section>div{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+section p{
+    text-align: center;
+    font-size: large;
+}
+section p:last-of-type{
+    font-size: 40px;
 }
 
 section button{
     padding: 7px;
     font-size: larger;
     border-radius: 10px;
-    display: none;
+    width: 150px;
+    align-self: center;
+    background-color: var(--yellow);
+    font-weight: 900;
+    color: var(--mainBg);
+    border: solid var(--yellow);
 }
 
 .player1{

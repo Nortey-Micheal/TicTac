@@ -2,6 +2,7 @@ function Gameboard(){
     const rows = 3;
     const columns = 3;
     const board = [];
+    const restartBtn = document.querySelector("section>div button")
     for (let i = 0; i < rows; i++) {
         board[i] = [];
         for (let j = 0; j < columns; j++){
@@ -41,6 +42,7 @@ function Gameboard(){
 
     //check if there is a winner or tie for the current run of the game
     function checkWin(name,marker){
+        const boardDiv = document.querySelector(".board")
         const endText =      document.querySelector("section>div>p:first-of-type")
         const winnerText = document.querySelector("section>div>p:last-of-type")
         const section = document.querySelector("section")
@@ -72,7 +74,7 @@ function Gameboard(){
          ) {
            endText.textContent = "This is the end of the round";
            winnerText.textContent = `${name} has won this round`;
-        section.style.display = "block";
+           section.style.display = "flex";
         }else if(board[0][0].getValue() !== "" &&
                  board[0][1].getValue() !=="" &&
                  board[0][2].getValue() !== "" &&
@@ -85,15 +87,8 @@ function Gameboard(){
             {
             endText.textContent = "This is a tie"   ;     
             winnerText.textContent = "No one won this round";
-        section.style.display = "block"
+            section.style.display = "flex"
         }
-    }
-
-    //end the game
-    function endGame () {
-        
-        
-        endText.textContent 
     }
 
   // This method will be used to print our board to the console.
@@ -163,8 +158,10 @@ function GameUI(){
     const game = GameController();
     const playerTurnCont = document.querySelector(".playerTurn");
     const boardDiv = document.querySelector(".board");
+    const section = document.querySelector("section");
+    const restartBtn = document.querySelector("section>div button")
     
-    const updateScreen = () => {
+    const updateScreen = (funct) => {
         //clear the board
         boardDiv.textContent = "";
 
@@ -188,15 +185,34 @@ function GameUI(){
             })
         })
 
-        
+        if(section.style.display === "flex"){
+            boardDiv.removeEventListener("click",funct)
+        }
     }
+
+    function restart(){
+        board.forEach((row,indexi)=> {
+            row.forEach((cell,index) =>{
+                //All clickables should be buttons!!
+                const cellButton = document.createElement("button");
+                cellButton.classList.add("cell");
+                cellButton.dataset.row = indexi;
+                cellButton.dataset.column = index;
+                cellButton.textContent = cell.newValue();
+                boardDiv.appendChild(cellButton)
+            })
+        })
+    }
+
+    restartBtn.addEventListener("click",restart)
+    
     function clickEvenHandler(event) {
         const clickedRow = event.target.dataset.row;
         const clickedColumn = event.target.dataset.column;
 
         if(!clickedColumn || !clickedRow) return;
         game.playRound(clickedRow,clickedColumn);
-        updateScreen();
+        updateScreen(clickEvenHandler);
     }
 
     boardDiv.addEventListener("click",clickEvenHandler);
