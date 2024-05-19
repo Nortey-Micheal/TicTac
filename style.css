@@ -260,4 +260,9 @@ section button{
     main>div>div>div:nth-of-type(2){
        gap: 10px;
     }
+
+    main>div>div{
+        width: 80%;
+        margin: 0 auto;
+    }
 }
