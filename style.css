@@ -133,7 +133,7 @@ main>div{
     display: flex;
     flex-direction: column;
     height: 100%;
-    max-width: 800px;
+    max-width: 600px;
 }
 
 main>div>div{
