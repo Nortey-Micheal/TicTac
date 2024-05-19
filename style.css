@@ -68,7 +68,7 @@ li,a{
     text-decoration: none;
     list-style: none;
     color: white;
-    font-size: large;
+    font-size: min(25px,3.5vw);
     font-weight: bold;
 }
 
@@ -103,7 +103,6 @@ header>div{
 
 header>div>div{
     flex-grow: 1;
-    
 }
 
 header>div>div>ul{
