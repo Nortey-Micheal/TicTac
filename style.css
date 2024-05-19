@@ -256,7 +256,7 @@ section button{
     color: var(--yellow);
 }
 
-@media screen and (max-width: 687px){
+@media (max-width: 687px){
     main>div>div>div:nth-of-type(2){
         gap: 5px;
     }
