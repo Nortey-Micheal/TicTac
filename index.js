@@ -181,6 +181,11 @@ function GameUI(){
                 cellButton.dataset.row = indexi;
                 cellButton.dataset.column = index;
                 cellButton.textContent = cell.getValue();
+                if (cellButton.textContent === "X"){
+                    cellButton.classList.add("player1");
+                } else if(cellButton.textContent === "O"){
+                    cellButton.classList.add("player2");
+                }
                 boardDiv.appendChild(cellButton)
             })
         })
@@ -205,7 +210,7 @@ function GameUI(){
     }
 
     restartBtn.addEventListener("click",restart)
-    
+
     function clickEvenHandler(event) {
         const clickedRow = event.target.dataset.row;
         const clickedColumn = event.target.dataset.column;
