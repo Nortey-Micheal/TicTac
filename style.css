@@ -257,7 +257,7 @@ section button{
 }
 
 @media screen and (max-width: 687px){
-    main>div{
-        max-width: 80%;
-   }
+    main>div>div>div:nth-of-type(2){
+        gap: 5px;
+    }
 }
