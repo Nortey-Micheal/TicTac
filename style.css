@@ -1,10 +1,11 @@
 :root{
-    --yellow: #FFD700;
-    --mainBg: #022C43;
+    --yellow: #FFD124;
+    --mainBg: #006778;
     --buttonShdw: #053F5E;
-    --buttonBg: #115173;
-    --X-Bg: #00A8CC;
-    --hover: #0C7B93;
+    --buttonBg: #0093AB;
+    --X-Bg: #FFFFFF;
+    --hover: #0c7a93;
+    --grey: #D3DEDC;
 }
 
 @font-face {
@@ -50,11 +51,9 @@ body{
 
 .board button{
     border-radius: 20px;
-    /* max-width: 250px;
-    max-height: 250px; */
     border: none;
     background-color: var(--buttonBg);
-    box-shadow: var(--buttonShdw) 7px 8px 4px;
+    box-shadow: var(--buttonShdw) 1px 8px 3px;
     font-size: clamp(40px,5rem,15vw);
     font-weight: bolder;
     font-family: Marker;
@@ -79,6 +78,15 @@ h1{
     text-align: center;
     text-decoration: #2B5876 underline 3px;
     font-family: Press;
+}
+
+h2{
+    color: var(--grey);
+    font-size: min(5.5vw,35px);
+    background-color: var(--buttonBg);
+    padding: 0 10px;
+    border-radius: 7px;
+    box-shadow: var(--buttonShdw) 1px 5px 1px;
 }
 
 .container{
@@ -133,6 +141,31 @@ main>div>div{
     flex-direction: column;
 }
 
+main>div>div>div:first-of-type{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0 40px 0;
+}
+
+main>div>div>div:first-of-type>div:first-of-type>span{
+    font-size: min(8vw,45px);
+}
+
+main>div>div>div:first-of-type>div:first-of-type>span:first-of-type{
+    color: var(--X-Bg);
+}
+
+main>div>div>div:first-of-type>div:first-of-type>span:last-of-type{
+    color: var(--yellow);
+}
+
+main>div>div>div:first-of-type>button{
+    width: min(7vw,40px);
+    height: min(7vw,40px);
+    box-shadow: var(--buttonShdw) 1px 4px 1px;
+}
+
 main>div>div>div:nth-of-type(2){
     flex-grow: 1;
     display: grid;
@@ -161,6 +194,7 @@ section p{
     text-align: center;
     font-size: large;
 }
+
 section p:last-of-type{
     font-size: 40px;
 }
@@ -178,9 +212,9 @@ section button{
 }
 
 .player1{
-    color: red;
+    color: var(--X-Bg);
 }
 
 .player2{
-    color: yellow;
+    color: var(--yellow);
 }
