@@ -258,6 +258,6 @@ section button{
 
 @media (max-width: 687px){
     main>div>div>div:nth-of-type(2){
-       //gap: 5px;
+       gap: 10px;
     }
 }
