@@ -31,7 +31,6 @@ function Gameboard(){
         const available = (board[row][column].getValue() === ""); //takes the selected space
         if (available) {
             board[row][column].newValue(marker)
-            //board[row][column].classList.add(`${name}`)
         }else{
             console.log(`Current Player is ${name} with this marker ${marker}`) //prevent players from 
             throw new Error("Location already taken"); //adding new values to aready taken spaces
@@ -160,6 +159,7 @@ function GameUI(){
     const boardDiv = document.querySelector(".board");
     const section = document.querySelector("section");
     const restartBtn = document.querySelector("section>div button")
+    const refreshBtn = document.querySelector("main>div>div>div:first-of-type>button")
     
     const updateScreen = (funct) => {
         //clear the board
@@ -190,26 +190,30 @@ function GameUI(){
             })
         })
 
-        if(section.style.display === "flex"){
-            boardDiv.removeEventListener("click",funct)
-        }
-    }
-
-    function restart(){
-        board.forEach((row,indexi)=> {
-            row.forEach((cell,index) =>{
-                //All clickables should be buttons!!
-                const cellButton = document.createElement("button");
-                cellButton.classList.add("cell");
-                cellButton.dataset.row = indexi;
-                cellButton.dataset.column = index;
-                cellButton.textContent = cell.newValue();
-                boardDiv.appendChild(cellButton)
+        function restart(){
+            boardDiv.textContent = "";
+            board.forEach((row,indexi)=> {
+                row.forEach((cell,index) =>{
+                    //All clickables should be buttons!!
+                    const cellButton = document.createElement("button");
+                    cellButton.classList.add("cell");
+                    cellButton.dataset.row = indexi;
+                    cellButton.dataset.column = index;
+                    cellButton.textContent = cell.newValue("");
+                    boardDiv.appendChild(cellButton);
+                })
             })
-        })
-    }
+            section.style.display = "none";
+            boardDiv.addEventListener("click",clickEvenHandler)
+        }
 
-    restartBtn.addEventListener("click",restart)
+        if(section.style.display === "flex"){
+            boardDiv.removeEventListener("click",funct);
+            restartBtn.addEventListener("click",restart);
+        }
+
+        refreshBtn.addEventListener("click",restart)
+    }
 
     function clickEvenHandler(event) {
         const clickedRow = event.target.dataset.row;
