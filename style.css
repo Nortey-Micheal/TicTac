@@ -255,3 +255,9 @@ section button{
 .player2{
     color: var(--yellow);
 }
+
+@media screen and (max-width: 687px){
+    main>div{
+        max-width: 500px;
+   }
+}
