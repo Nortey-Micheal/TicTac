@@ -258,6 +258,6 @@ section button{
 
 @media screen and (max-width: 687px){
     main>div{
-        max-width: 500px;
+        max-width: 80%;
    }
 }
