@@ -177,6 +177,38 @@ main>div>div>div:nth-of-type(2){
     gap: 20px;
 }
 
+main>div>div>div:last-of-type{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+main>div>div>div:last-of-type>div{
+    text-align: center;
+    width: clamp(130px,20vw,25%);
+    height: min(10vw,80px);
+    border-radius: 10px;
+}
+
+main>div>div>div:last-of-type>div:first-of-type{
+    background-color: var(--X-Bg);
+    
+}
+
+main>div>div>div:last-of-type>div p:first-of-type{
+    margin-top: 8px;
+    color: var(--buttonShdw);
+}
+
+main>div>div>div:last-of-type>div:nth-of-type(2){
+    background-color: var(--grey);
+}
+
+
+main>div>div>div:last-of-type>div:nth-of-type(3){
+    background-color: var(--yellow);
+}
+
 section {
     position: absolute;
     top: 30%; 

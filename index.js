@@ -45,7 +45,6 @@ function Gameboard(){
         const endText =      document.querySelector("section>div>p:first-of-type")
         const winnerText = document.querySelector("section>div>p:last-of-type")
         const section = document.querySelector("section")
-        // getBoard()
         if (board[0][0].getValue() === marker &&// leading diagonal \
          board[1][1].getValue() === marker &&
          board[2][2].getValue() === marker ||//top row
