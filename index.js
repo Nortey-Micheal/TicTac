@@ -4,7 +4,8 @@ function Gameboard(){
     const board = [];
     const xScore = document.querySelector(".scoreBoard>div:first-of-type>p:last-of-type");
     const tieScore = document.querySelector(".scoreBoard>div:nth-of-type(2)>p:last-of-type");
-    const oScore = document.querySelector(".scoreBoard>div:last-of-type>p:last-of-type")
+    const oScore = document.querySelector(".scoreBoard>div:last-of-type>p:last-of-type");
+    const newGame = document.querySelector("section>div button:first-of-type")
 
     for (let i = 0; i < rows; i++) {
         board[i] = [];
@@ -110,6 +111,15 @@ function Gameboard(){
         const getX = () => Xscore;
         const getT = () => Tscore;
         const getO = () => Oscore;
+        const resetX = () => {
+            Xscore = 0;
+        }
+        const resetT = () => {
+            Tscore = 0;
+        }
+        const resetO = () => {
+            Oscore = 0;
+        }
 
 
         xScore.textContent = Xscore;
@@ -119,7 +129,10 @@ function Gameboard(){
         return {
             getO,
             getT,
-            getX
+            getX,
+            resetO,
+            resetT,
+            resetX
         }
         
     }
@@ -191,7 +204,8 @@ function GameController(
     return{
         getCurrentPlayer,
         playRound,
-        getBoard: boards.getBoard
+        getBoard: boards.getBoard,
+        checkWin: boards.checkWin
     }
 }
 
@@ -200,8 +214,12 @@ function GameUI(){
     const playerTurnCont = document.querySelector(".playerTurn");
     const boardDiv = document.querySelector(".board");
     const section = document.querySelector("section");
-    const restartBtn = document.querySelector("section>div button:last-of-type")
-    const refreshBtn = document.querySelector("main>div>div>div:first-of-type>button")
+    const restartBtn = document.querySelector("section>div button:last-of-type");
+    const refreshBtn = document.querySelector("main>div>div>div:first-of-type>button");
+    const xScore = document.querySelector(".scoreBoard>div:first-of-type>p:last-of-type");
+    const tieScore = document.querySelector(".scoreBoard>div:nth-of-type(2)>p:last-of-type");
+    const oScore = document.querySelector(".scoreBoard>div:last-of-type>p:last-of-type");
+    const newGame = document.querySelector("section>div button:first-of-type")
     
     const updateScreen = (funct) => {
         //clear the board
@@ -248,6 +266,28 @@ function GameUI(){
             section.style.display = "none";
             boardDiv.addEventListener("click",clickEvenHandler)
         }
+
+        function NewGame() {
+            xScore.textContent = game.checkWin().resetX();
+            tieScore.textContent = game.checkWin().resetT();
+            oScore.textContent = game.checkWin().resetO();
+            boardDiv.textContent = "";
+            board.forEach((row,indexi)=> {
+                row.forEach((cell,index) =>{
+                    //All clickables should be buttons!!
+                    const cellButton = document.createElement("button");
+                    cellButton.classList.add("cell");
+                    cellButton.dataset.row = indexi;
+                    cellButton.dataset.column = index;
+                    cellButton.textContent = cell.newValue("");
+                    boardDiv.appendChild(cellButton);
+                })
+            })
+            section.style.display = "none";
+            boardDiv.addEventListener("click",clickEvenHandler)
+        }
+
+        newGame.addEventListener("click", NewGame)
 
         if(section.style.display === "flex"){
             boardDiv.removeEventListener("click",funct);

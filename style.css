@@ -259,6 +259,7 @@ section button{
     font-weight: 900;
     color: var(--mainBg);
     border: solid var(--yellow);
+    cursor: pointer;
 }
 
 section>div>div{
