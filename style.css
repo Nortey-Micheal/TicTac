@@ -194,7 +194,7 @@ main>div>div>div:last-of-type{
 main>div>div>div:last-of-type>div{
     text-align: center;
     width: clamp(130px,20vw,25%);
-    height: min(10vw,80px);
+    height: min(12vw,80px);
     border-radius: 10px;
 }
 

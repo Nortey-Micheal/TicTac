@@ -14,36 +14,11 @@ function Gameboard(){
         
     }
 
-    function Xscore() {
-        let xValue = 0;
-        const addXscore = () => xValue++;
-        const getXvalue = () => xValue;
-        return {
-            addXscore,
-            getXvalue
-        }
-    }
-    
+    //initial scores
+    let Xscore = 0;
+    let Tscore = 0;
+    let Oscore = 0;
 
-    function TieScore(){
-        let tieValue = 0;
-        const addTieScore =() => tieValue++;
-        const getTieValue = () => tieValue;
-        return {
-            addTieScore,
-            getTieValue
-        }
-    } 
-    
-    function Oscore() {
-        let oValue = 0;
-        const addOscore = () => oValue++;
-        const getOvalue = () => oValue;
-        return {
-            addOscore,
-            getOvalue
-        }
-    }
 
     const getBoard = () => board;
 
@@ -68,7 +43,6 @@ function Gameboard(){
         }else{
             console.log(`Current Player is ${name} with this marker ${marker}`) //prevent players from 
             throw new Error("Location already taken"); //adding new values to aready taken spaces
-            
         }
         
     }
@@ -80,6 +54,7 @@ function Gameboard(){
         const endText =      document.querySelector("section>div>p:first-of-type")
         const winnerText = document.querySelector("section>div>p:last-of-type")
         const section = document.querySelector("section")
+
         if (board[0][0].getValue() === marker &&// leading diagonal \
          board[1][1].getValue() === marker &&
          board[2][2].getValue() === marker ||//top row
@@ -109,12 +84,12 @@ function Gameboard(){
             endText.textContent = "This is the end of the round";
             winnerText.textContent = `${name} has won this round`;
             section.style.display = "flex";
-            Xscore().addXscore()
+            Xscore++;
            } else {
             endText.textContent = "This is the end of the round";
             winnerText.textContent = `${name} has won this round`;
             section.style.display = "flex";
-            Oscore().addOscore();
+            Oscore++;
            }
         }else if(board[0][0].getValue() !== "" &&
                  board[0][1].getValue() !=="" &&
@@ -128,13 +103,34 @@ function Gameboard(){
             {
             endText.textContent = "This is a tie"   ;     
             winnerText.textContent = "No one won this round";
-            section.style.display = "flex"
+            section.style.display = "flex";
+            Tscore++
         }
+
+        const getX = () => Xscore;
+        const getT = () => Tscore;
+        const getO = () => Oscore;
+
+
+        xScore.textContent = Xscore;
+        tieScore.textContent = Tscore;
+        oScore.textContent = Oscore;
+
+        return {
+            getO,
+            getT,
+            getX
+        }
+        
     }
 
-    xScore.textContent = Xscore().getXvalue();
-    tieScore.textContent = TieScore().getTieValue();
-    oScore.textContent = Oscore().getOvalue()
+    checkWin().getO();
+    checkWin().getT();
+    checkWin().getX();
+
+    
+
+    
 
   // This method will be used to print our board to the console.
   // It is helpful to see what the board looks like after each turn as we play,
