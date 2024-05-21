@@ -249,6 +249,7 @@ section p:last-of-type{
 }
 
 section button{
+    font-family: Poetsen,'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     padding: 7px;
     font-size: larger;
     border-radius: 10px;
