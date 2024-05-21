@@ -200,7 +200,7 @@ function GameUI(){
     const playerTurnCont = document.querySelector(".playerTurn");
     const boardDiv = document.querySelector(".board");
     const section = document.querySelector("section");
-    const restartBtn = document.querySelector("section>div button")
+    const restartBtn = document.querySelector("section>div button:last-of-type")
     const refreshBtn = document.querySelector("main>div>div>div:first-of-type>button")
     
     const updateScreen = (funct) => {

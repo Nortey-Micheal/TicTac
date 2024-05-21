@@ -260,6 +260,19 @@ section button{
     border: solid var(--yellow);
 }
 
+section>div>div{
+    width: min(500px,100%);
+    align-self: center;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+section button:first-of-type{
+    color: var(--X-Bg);
+    background-color: var(--buttonShdw);
+    border-color: var(--buttonShdw);
+}
+
 .player1{
     color: var(--X-Bg);
 }
